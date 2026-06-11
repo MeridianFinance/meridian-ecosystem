@@ -48,13 +48,14 @@ We write about this in long form on the Arc Hub: *Routing solved. Trust didn't.*
 
 ## One stack, not a product list
 
-Every product below feeds the next one. A human pays at a merchant checkout; an AI agent pays through the same rails, machine to machine. The treasury earns on every dollar while it sits, payroll streams out of it continuously, and soon the card spends it directly. When the actors are autonomous agents, the trust layer verifies who they are and whether the work was actually done. One loop: **accept, manage, deploy, verify.**
+Every product below feeds the next one. A human pays at a merchant checkout; an AI agent pays through the same rails, machine to machine. At checkout, the buyer can round up and the spare cents go to a verified charity. The treasury earns on every dollar while it sits, payroll streams out of it continuously, and soon the card spends it directly. When the actors are autonomous agents, the trust layer verifies who they are and whether the work was actually done. One loop: **accept, manage, deploy, verify.**
 
 ```mermaid
 flowchart LR
     H(["Human buyer"]) -- "merchant checkout" --> A
     AG(["AI agent"]) -- "MCP server · x402" --> A
     A["Accept<br/>Meridian Pay"] --> M["Earn<br/>YieldVault USYC"]
+    A --> G["Give<br/>round-up at checkout · locked until launch"]
     M --> P["Pay out<br/>PaymentStream"]
     M --> C["Spend<br/>Meridian Card · coming"]
     P --> A
@@ -103,7 +104,7 @@ Continuous USDC streams for payroll, subscriptions and vendor payments. Money mo
 
 ### Meridian Pay
 
-Checkout and merchant settlement on Arc, in private beta, with the Enterprise USYC Vault as the merchant treasury leg: a merchant accepts USDC at checkout and the balance starts earning the moment it settles. That is the accept-to-earn half of the loop above. More on this one when it ships publicly.
+Checkout and merchant settlement on Arc, in private beta, with the Enterprise USYC Vault as the merchant treasury leg: a merchant accepts USDC at checkout and the balance starts earning the moment it settles. That is the accept-to-earn half of the loop above. Merchants can also switch on round-up donations at checkout, powered by Meridian Give. More on both when they ship publicly.
 
 ### Cross-chain and settlement plumbing
 
@@ -188,7 +189,7 @@ We get asked why the source is private. Short answer: we are a small team in a f
 
 Arc mainnet is around the corner. We were there on day one of Testnet. We will be there on day one of mainnet, with audits, a new themeridian.finance, and the same habit: ship first, talk after.
 
-Also in the pipeline: **Meridian Pay** opens publicly, and **Meridian Card**, spending the treasury directly in the real world. No Card contracts are deployed yet, by design: the card rides on the rails above, and we do not announce architecture before it ships.
+Also in the pipeline: **Meridian Pay** opens publicly, **Meridian Give** launches with it, and **Meridian Card** brings the treasury to the real world. No Card contracts are deployed yet, by design: the card rides on the rails above, and we do not announce architecture before it ships.
 
 ## Contact
 
