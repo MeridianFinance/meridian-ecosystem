@@ -136,9 +136,13 @@ Firmata Protocol V2.3, canonical deployment:
 | FirmataSLA | `0x8b1fb35f25c799aa4dc8460f83b4b7a86f0f7854` |
 | FirmataUsageLog | `0x4bf87626da383230eb663988e45975f3e9772003` |
 
+### YieldClaw
+
+The proof that the stack above is not theoretical: YieldClaw is a conversational shopping agent, registered as **ERC-8004 agent #262** on the IdentityRegistry above. It negotiates and buys from merchants in USDC on Arc, autonomously, no human signature, no card. Built during the OpenClaw hackathon, still running.
+
 ### arcagent.live
 
-Observability for agent commerce on Arc: live view of agent transactions, reputation events and validation flows. The window into everything above. [arcagent.live](https://arcagent.live)
+Observability for agent commerce on Arc: live view of agent transactions, reputation events and validation flows. The window into everything above, including YieldClaw at work. [arcagent.live](https://arcagent.live)
 
 ## Numbers, not adjectives
 
