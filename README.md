@@ -156,14 +156,25 @@ All of it verifiable on [testnet.arcscan.app](https://testnet.arcscan.app). We p
 
 ERC-4626 (vaults), ERC-8004 (agent identity and reputation), ERC-8183 (commerce and conditional escrow), x402 (HTTP-level settlement), CCTP V2, Permit2, UUPS upgradeable proxies. Zero-custodial by design: we never hold user funds. Governance behind a 24 hour timelock, role-based access control on every privileged path, ReentrancyGuard and SafeERC20 on external calls, CI with secrets scanning on every repository. Audits are planned ahead of mainnet; until then, the test suites and the onchain history are the evidence.
 
-## The websites
+## The websites, all of them
 
-| Site | What it is |
-|---|---|
-| [themeridian.finance](https://themeridian.finance) | The main product surface: vault, streams, dashboard. A major new version is in the works, with features we are keeping for the release. What is live today is product, not brochure. |
-| [firmata.ai](https://firmata.ai) | Firmata Protocol: the KYA thesis, the docs surface, the dashboard. |
-| [arcagent.live](https://arcagent.live) | Live observability for agent commerce on Arc. |
-| [dev.themeridian.finance/erp-for-agents](https://dev.themeridian.finance/erp-for-agents) | Meridian Agent OS preview: the six pillars rendered in one cockpit. |
+Every surface we run is listed below, open or not. A directory entry you cannot map to real surfaces is just a claim, so here is the full map.
+
+One thing to know before you click: **several surfaces are deliberately locked right now.** We are in an active test and feature-update phase ahead of mainnet, and we lock pre-launch products on purpose rather than leave them open to scraping. If a link below greets you with an error page or a login wall, that is the lock working, not the product failing.
+
+| Surface | Status | What it is |
+|---|---|---|
+| [themeridian.finance](https://themeridian.finance) | Live | The main product surface: vault, streams, dashboard. A major new version is in the works, with features we are keeping for the release. |
+| [firmata.ai](https://firmata.ai) | Live | Firmata Protocol: the KYA thesis and the protocol surface. Dashboard is access-gated. |
+| [arcagent.live](https://arcagent.live) | Live | Observability for agent commerce on Arc. Watch our agents transact, right now. |
+| [themeridian.cards](https://www.themeridian.cards) | Live, landing | Meridian Card: spend the treasury directly in the real world. Contracts intentionally not deployed yet. |
+| [docs.firmata.ai](https://docs.firmata.ai) | Locked, test phase | Protocol documentation, SLA schema, SDK guides. Locked while we update it. |
+| [pay.themeridian.finance](https://pay.themeridian.finance) | Locked, private beta on testnet | Merchant checkout, dashboard, API. Locked during the beta, opens publicly when it ships. |
+| test.pay.themeridian.finance | Locked, staging | Pre-production QA environment for Meridian Pay. |
+| dev.themeridian.finance/erp-for-agents | Locked, preview | Meridian Agent OS cockpit: the six pillars rendered live for one agent address. |
+| give.themeridian.finance | Locked until launch | Meridian Give: USDC charitable giving with merchant round-up at checkout. Returns 404 to unauthenticated visitors, by design. |
+
+Reviewing us for Circle, Arc or a partnership and want to see behind a lock? Ask. We will create reviewer credentials tied to your email. You get the product, not the codebase.
 
 ## About the private code
 
