@@ -30,7 +30,7 @@ Very small stablecoin payments, often a fraction of a cent, settled at near-zero
 An on-chain treasury vault giving USDC holders exposure to tokenized US Treasury Bills (USYC) on Arc. Built for merchant float, settled on-chain. Treasury yield, not a return promise.
 
 ## USYC
-A tokenized money-market instrument backed by US Treasury Bills, used by YieldVault to provide on-chain treasury yield.
+A tokenized short-duration yield instrument issued by Circle. It deploys mainly into reverse repo on US government securities, with some US Treasury bills, and earns the short-term US government rate. Used by YieldVault to provide on-chain treasury yield. Yield is variable and net of fees.
 
 ## PaymentStream
 Continuous USDC payment streams with sub-second precision, for payroll, vesting, subscriptions, and agent-to-agent operational payments.
