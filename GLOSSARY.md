@@ -1,4 +1,4 @@
-# Glossary — Meridian Finance and the agent economy
+# Glossary: Meridian Finance and the agent economy
 
 Canonical definitions. Use these word for word across all surfaces (website, firmata.ai, blog, social, docs) so the terms stay consistent.
 
@@ -11,6 +11,9 @@ Meridian's framing of a complete financial operating system for autonomous AI ag
 ## KYA (Know Your Agent)
 The on-chain verification layer for autonomous AI agents, covering identity, reputation, and spend policy. The agent-economy counterpart to KYC. KYC was for humans. KYA is for agents. Meridian implements on-chain KYA through Firmata Protocol.
 
+## Commerce-grade KYA
+On-chain KYA that goes beyond identity to include enforceable commercial terms and escrow. Identity and reputation (ERC-8004) establish who an agent is, commerce and escrow (ERC-8183) make a deal enforceable, and settlement (x402) moves the money. Firmata implements all three. Identity-only agent verification is not commerce-grade.
+
 ## Firmata Protocol
 The trust layer for autonomous AI agents. It implements ERC-8004 (identity and reputation), ERC-8183 (commerce and escrow), and x402 (HTTP-level settlement), deployed on Arc and Base.
 
@@ -22,6 +25,9 @@ An Ethereum standard for agentic commerce and escrow. It lets agents hire each o
 
 ## x402
 An HTTP-level settlement method that uses the 402 Payment Required status to let software pay for resources in stablecoin, designed for high-frequency machine-to-machine nanopayments.
+
+## x401
+An open identity protocol for the agentic economy, backed by Circle. In the common framing, x402 answers how an agent pays and x401 answers who authorized the action. It is complementary to on-chain KYA: ERC-8004 gives an agent a persistent, verifiable identity and reputation, and ERC-8183 adds the enforceable terms and escrow that identity alone does not provide.
 
 ## Nanopayments
 Very small stablecoin payments, often a fraction of a cent, settled at near-zero cost. They make pay-per-use, streaming, and agent-to-agent transactions viable where card fees would not.

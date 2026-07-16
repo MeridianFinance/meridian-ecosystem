@@ -36,7 +36,7 @@ contract MeridianEcosystem is Payments, Treasury, Trust {
 
 **Programmable payments, treasury and trust infrastructure on [Arc](https://www.arc.io). Building since day one of Testnet, October 28, 2025.**
 
-We build the financial layer that regulated businesses and autonomous agents can actually run on: yield-bearing treasury backed by tokenized T-bills, streaming payments, merchant settlement, and an onchain trust protocol for AI agents. Everything listed below is deployed on Arc Testnet (chain id 5042002) and verifiable on [arcscan](https://testnet.arcscan.app).
+We build the financial layer that regulated businesses and autonomous agents can actually run on: yield-bearing treasury backed by a tokenized money market fund (USYC), streaming payments, merchant settlement, and an onchain trust protocol for AI agents. Everything listed below is deployed on Arc Testnet (chain id 5042002) and verifiable on [arcscan](https://testnet.arcscan.app).
 
 This repository is the public index of what we build and where it lives onchain. The product code sits in private repositories. If you are reviewing us for a partnership, an audit or an integration, ask for read-only access: open an issue here or DM [@Meridian_Fi](https://x.com/Meridian_Fi) with your GitHub handle.
 
@@ -45,6 +45,49 @@ This repository is the public index of what we build and where it lives onchain.
 Stablecoin routing is solved. Sub-second settlement is solved. What is not solved is the layer on top: how does a regulated business run treasury and payroll on public rails, and who do you trust when the counterparty is an autonomous agent. Both questions have the same shape. Both need infrastructure, not promises.
 
 We write about this in long form on the Arc Hub: *Routing solved. Trust didn't.* and *Private rails still need to know who they're paying.*
+
+## Know Your Agent, defined
+
+KYA is Know Your Agent. It is the onchain verification layer for autonomous AI agents: identity, reputation, and spend policy. KYC was for humans. KYA is for agents. We implement onchain KYA through Firmata Protocol.
+
+One thing gets missed in the rush to build agent identity. Knowing who an agent is does not tell you the work was delivered, and it does not get your money back if it was not. Identity on its own is a name with no deal behind it. KYA for real commerce needs three things, not one: identity, enforceable terms, and settlement. That is why Firmata implements three standards together.
+
+| Standard | Role | What it solves |
+|---|---|---|
+| ERC-8004 | Identity and reputation | Who the agent is, and its track record. Identity, Reputation and Validation registries. |
+| ERC-8183 | Commerce and conditional escrow | The deal itself. A job funded in escrow that releases only when the work checks out. |
+| x402 | Settlement | How the payment moves. Stablecoin settlement over HTTP 402, machine to machine. |
+
+Most agent-identity projects stop at the first row. Firmata carries all three. The escrow row is the one that turns identity into commerce you can trust.
+
+There is a fourth question in the air right now: who authorized the action. Circle backs x401 for it. That is complementary, not competing. x402 says how an agent pays, x401 says who authorized it, and ERC-8183 says how the terms are enforced and settled. Firmata sits on the enforcement and settlement side, onchain, on Arc.
+
+### KYC vs KYA
+
+| | KYC | KYA |
+|---|---|---|
+| Subject | Humans | Autonomous AI agents |
+| Verified | Identity of a person | Identity, reputation and spend policy of an agent |
+| Stored | Bank and provider databases | Onchain registries (ERC-8004) |
+| Checkable by | The institution | Any counterparty contract or agent |
+
+### How an agent pays, step by step
+
+1. The agent presents a verified identity (ERC-8004).
+2. A spend policy authorizes the transaction.
+3. Payment settles in USDC over x402.
+4. Commercial terms and escrow are enforced via ERC-8183.
+
+### Questions we get
+
+**What is the difference between ERC-8004 and ERC-8183?**
+ERC-8004 is identity and reputation: an onchain identity and a track record. ERC-8183 is commerce and escrow: a job funded in escrow that releases only when the work is verified. Every ERC-8183 job is recorded against the agent's ERC-8004 identity.
+
+**Is onchain KYA just agent identity?**
+No. Identity is necessary and not sufficient. Onchain KYA covers identity and reputation (ERC-8004), enforceable terms and escrow (ERC-8183), and settlement (x402). Identity-only tools tell you who an agent is, not whether the job was done or whether your payment is protected.
+
+**Is Meridian live on mainnet?**
+No. Everything here runs on Arc Testnet, audited before mainnet, verifiable on arcscan.
 
 ## One stack, not a product list
 
@@ -86,7 +129,7 @@ Every product settles in USDC on Arc and is built on Circle primitives end to en
 
 ### Meridian YieldVault
 
-Programmable yield on tokenized US T-bills (Hashnote USYC, the largest tokenized money market fund), built as an ERC-4626 vault. Two deployments: a retail vault, and an enterprise vault that serves as merchant treasury. Deposits earn while they sit, withdraw any time, governance actions go through a 24 hour timelock. Meridian is whitelisted on the USYC Teller, which is not a common thing to be able to write.
+Programmable yield on Hashnote USYC, the largest tokenized money market fund, built as an ERC-4626 vault. Two deployments: a retail vault, and an enterprise vault that serves as merchant treasury. Deposits earn while they sit, withdraw any time, governance actions go through a 24 hour timelock. Meridian is whitelisted on the USYC Teller, which is not a common thing to be able to write.
 
 | Contract | Address (Arc Testnet) |
 |---|---|
