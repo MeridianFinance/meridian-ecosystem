@@ -94,11 +94,12 @@ No. Everything here runs on Arc Testnet, audited before mainnet, verifiable on a
 Every product below feeds the next one. A human pays at a merchant checkout; an AI agent pays through the same rails, machine to machine. At checkout, the buyer can round up and the spare cents go to a verified charity. The treasury earns on every dollar while it sits, payroll streams out of it continuously, and soon the card spends it directly. When the actors are autonomous agents, the trust layer verifies who they are and whether the work was actually done. One loop: **accept, manage, deploy, verify.**
 
 ```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 42, 'rankSpacing': 58, 'padding': 10}, 'themeVariables': {'fontSize': '16px'}}}%%
 flowchart LR
     H(["Human buyer"]) -- "merchant checkout" --> A
     AG(["AI agent"]) -- "MCP server · x402" --> A
     A["Accept<br/>Meridian Pay"] --> M["Earn<br/>YieldVault USYC"]
-    A --> G["Give<br/>round-up at checkout · locked until launch"]
+    A --> G["Give<br/>round-up · coming"]
     M --> P["Pay out<br/>PaymentStream"]
     M --> C["Spend<br/>Meridian Card · coming"]
     P --> A
@@ -106,6 +107,17 @@ flowchart LR
     T -.-> M
     T -.-> P
     O["arcagent.live<br/>observability"] -. "watches it all" .-> T
+
+    classDef hub fill:#1c1608,stroke:#C9A84C,stroke-width:2px,color:#F3ECDB;
+    classDef prod fill:#141210,stroke:#8a7a4e,stroke-width:1.5px,color:#EDE6D6;
+    classDef actor fill:#12100b,stroke:#C9A84C,stroke-width:1.5px,color:#F3ECDB;
+    classDef trust fill:#0e1a1e,stroke:#7FA8B4,stroke-width:1.5px,color:#CDE7EE;
+    class A hub;
+    class M,G,P,C prod;
+    class H,AG actor;
+    class T,O trust;
+    linkStyle 0,1,2,3,4,5,6 stroke:#C9A84C,stroke-width:1.5px;
+    linkStyle 7,8,9,10 stroke:#7FA8B4,stroke-width:1.4px;
 ```
 
 For autonomous agents this loop has a name: **Meridian Agent OS**. Identity, Treasury, Payroll, Procurement, Reputation, Compliance. One agent address, one signature, the whole financial life of an agent in one place. A preview is live at [dev.themeridian.finance/erp-for-agents](https://dev.themeridian.finance/erp-for-agents).
@@ -121,6 +133,12 @@ flowchart TB
     PRODUCTS --> ARC
     ARC --> CIRCLE
     SRC -- "USDC in, via CCTP V2" --> ARC
+
+    classDef hub fill:#1c1608,stroke:#C9A84C,stroke-width:2px,color:#F3ECDB;
+    classDef base fill:#141210,stroke:#8a7a4e,stroke-width:1.5px,color:#EDE6D6;
+    class PRODUCTS,ARC hub;
+    class CIRCLE,SRC base;
+    linkStyle default stroke:#C9A84C,stroke-width:1.5px;
 ```
 
 Every product settles in USDC on Arc and is built on Circle primitives end to end. Nothing custodial sits in between.
