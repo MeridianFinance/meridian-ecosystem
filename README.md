@@ -5,7 +5,7 @@
 <br/><br/>
 
 [![Arc Testnet](https://img.shields.io/badge/Arc%20Testnet-chain%205042002-C9A84C?style=for-the-badge&labelColor=0a0a0a)](https://testnet.arcscan.app)
-[![Contracts](https://img.shields.io/badge/contracts%20live-16-C9A84C?style=for-the-badge&labelColor=0a0a0a)](https://testnet.arcscan.app)
+[![Contracts](https://img.shields.io/badge/contracts%20live-20-C9A84C?style=for-the-badge&labelColor=0a0a0a)](https://testnet.arcscan.app)
 [![Building since](https://img.shields.io/badge/building%20since-Day%201%20of%20Testnet-C9A84C?style=for-the-badge&labelColor=0a0a0a)](#numbers-not-adjectives)
 
 [![Transactions](https://img.shields.io/badge/onchain%20transactions-47%2C800%2B-8a7a4e?style=flat-square&labelColor=0a0a0a)](https://testnet.arcscan.app)
@@ -28,7 +28,7 @@ pragma solidity ^0.8.24;
 /// @title   Meridian Ecosystem
 /// @author  Two brothers, building since day one of Arc Testnet
 /// @notice  Programmable payments, treasury and trust for the agentic economy
-/// @dev     16 contracts live · 452 tests passing · receipts over roadmaps
+/// @dev     20 contracts live · 452 tests passing · receipts over roadmaps
 contract MeridianEcosystem is Payments, Treasury, Trust {
     // accept → manage → deploy → verify
 }
@@ -99,7 +99,7 @@ flowchart LR
     H(["Human buyer"]) -- "merchant checkout" --> A
     AG(["AI agent"]) -- "MCP server · x402" --> A
     A["Accept<br/>Meridian Pay"] --> M["Earn<br/>YieldVault USYC"]
-    A --> G["Give<br/>round-up · coming"]
+    A --> G["Give<br/>round-up · live"]
     M --> P["Pay out<br/>PaymentStream"]
     M --> C["Spend<br/>Meridian Card · coming"]
     P --> A
@@ -165,7 +165,18 @@ Continuous USDC streams for payroll, subscriptions and vendor payments. Money mo
 
 ### Meridian Pay
 
-Checkout and merchant settlement on Arc, in private beta, with the Enterprise USYC Vault as the merchant treasury leg: a merchant accepts USDC at checkout and the balance starts earning the moment it settles. That is the accept-to-earn half of the loop above. Merchants can also switch on round-up donations at checkout, powered by Meridian Give. More on both when they ship publicly.
+Checkout and merchant settlement on Arc, in private beta, with the Enterprise USYC Vault as the merchant treasury leg: a merchant accepts USDC at checkout and the balance starts earning the moment it settles. That is the accept-to-earn half of the loop above. Merchants can also switch on round-up donations at checkout, powered by Meridian Give, below. More on Pay when it ships publicly.
+
+### Meridian Give
+
+Charitable giving in USDC, and the give half of the loop above. A buyer rounds up at checkout, or gives directly, and the money reaches a KYB-verified charity onchain with a receipt that cannot be edited afterwards. Donation proofs are soulbound, so a receipt stays attached to the wallet that earned it. Campaign escrows are deployed per campaign through a factory, which keeps one campaign's funds out of reach of another. The contracts have been live on Arc Testnet since April 12; the site opens with Meridian Pay.
+
+| Contract | Address (Arc Testnet) |
+|---|---|
+| DonationPool | `0x26D00cCc9F6824b3E0a2A4cfD537E30113d289Ab` |
+| CharityRegistry | `0x22f103F5267Be465F0ef7C2e513CB951CB3ad023` |
+| DonationProof, soulbound receipts | `0xF98edc92DBf64544EF79479353dF7B66500aA85B` |
+| ArcariusFactory, campaign escrows | `0x9B8BD40172e66CaEb91b2adb6945FAA13E6Eb8CA` |
 
 ### Cross-chain and settlement plumbing
 
@@ -208,7 +219,7 @@ Observability for agent commerce on Arc: live view of agent transactions, reputa
 
 ## Numbers, not adjectives
 
-- **16 contracts** indexed here, **43+ smart contracts** total across four protocol repositories
+- **20 contracts** indexed here, **43+ smart contracts** total across four protocol repositories
 - Building since **day one of Testnet: October 28, 2025**
 - **47,800+ onchain transactions** across the stack
 - **452 Foundry tests passing** across 23 test suites, fuzz tests included
