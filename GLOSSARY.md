@@ -48,7 +48,7 @@ Meridian's checkout for accepting USDC and EURC payments, with treasury yield av
 A euro stablecoin issued by Circle, backed 1:1 by euro reserves and issued under the EU MiCA framework. It brings the same audited, regulated model as USDC to the euro.
 
 ## StableFX
-Circle's on-chain foreign exchange method for stablecoins. It lets parties convert between currencies such as USDC and EURC on-chain, with transparent settlement, without a traditional FX intermediary.
+Circle's on-chain foreign exchange method for stablecoins. It lets parties convert between currencies such as USDC and EURC on-chain, with transparent settlement, without a traditional FX intermediary. As described by Circle: vetted local currency stablecoins covering major and emerging market corridors, near-instant settlement 24/7, payment-versus-payment settlement so that both sides of a trade get funded or neither does, less trapped capital, and access to multiple vetted counterparties through a single onboarding. Announced August 2026 and described by Circle as launching soon; confirm current availability before describing it as live.
 
 ## On-chain FX
 Currency conversion between stablecoins, for example US dollar to euro via USDC and EURC, settled directly on a blockchain with transparent rates and near-instant settlement.
@@ -73,6 +73,12 @@ The three components of agent trust sit at different moments of a transaction, a
 
 ## Conditional settlement
 A payment that moves into a held state and releases only when an agreed condition is met. The distinction from a pre-payment check matters: in conditional settlement the value does leave the payer's control, it simply does not reach the counterparty until delivery is confirmed. ERC-8183 defines this as a Job moving from Open to Funded to Submitted to a terminal state, releasing to the provider on completion or refunding on expiry.
+
+## Payment versus payment (PvP)
+The currency-exchange case of conditional settlement: both legs of a foreign exchange trade move simultaneously, so either both sides are funded or neither is, and neither party is exposed to the other's failure in the interval between them. The mechanism exists because of a failure rather than a design goal. On 26 June 1974 German authorities withdrew the licence of Bankhaus Herstatt at the end of the German banking day; counterparties had paid Deutschmarks that morning against dollars due later in New York, where the clearing day was still running, and the dollars never came. Foreign exchange settlement risk is still called Herstatt risk, and PvP settlement for wholesale FX did not ship until CLS Bank began operating in 2002. Circle's StableFX brings PvP to local currency corridors on stablecoin rails.
+
+## Why PvP does not extend to paying for work
+Payment versus payment is possible because of a property of the trade, not of the technology: in a currency exchange both legs are the same kind of object. Both are bearer instruments, and both transfers are visible to the settlement system in the same way, at the same instant. The system never has to form an opinion, it observes two transfers and makes each conditional on the other. When one leg is a deliverable rather than money, there is no second leg the chain can see, because a statement such as "the work was adequate" is not a fact that exists in a ledger the way a transfer is. This is the boundary between atomic exchange, which is solved, and conditional settlement against delivery, which is what ERC-8183 addresses by enforcing custody and a deadline rather than by judging the work.
 
 ## Why escrow is upstream of reputation
 Escrow and reputation are frequently described as two mechanisms that combine. They are better understood as one mechanism observed at two horizons. Escrow protects a single transaction. The record it leaves is also the only reputation input that is expensive to fake, precisely because value was at risk and the deal could have broken. Reputation is therefore not a second system bolted alongside escrow, it is escrow's output. This ordering dissolves the cold-start problem rather than solving it: an agent does not need a score to transact safely on day one, it needs escrow, and the score is what the transaction produces.
