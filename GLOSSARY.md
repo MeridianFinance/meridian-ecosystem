@@ -68,6 +68,45 @@ The layer of standards and rails, identity, payment, and escrow, that makes tran
 ## Arc
 Circle's Layer 1 blockchain (chain 5042002), with sub-second finality and USDC native gas.
 
+## Before, during, after (the three positions of agent trust)
+The three components of agent trust sit at different moments of a transaction, and collapsing them is the most common error in the field. Verification happens before: identity checks, allowlists, risk scores, everything that produces a verdict prior to payment. Escrow happens during: the funds move, but into a held state rather than to the counterparty, while the job is performed. Reputation happens after: the outcome is recorded and prices the next transaction. Treating escrow as a pre-payment check is what produces an ecosystem full of tools that score a counterparty and none that hold money while work is done.
+
+## Conditional settlement
+A payment that moves into a held state and releases only when an agreed condition is met. The distinction from a pre-payment check matters: in conditional settlement the value does leave the payer's control, it simply does not reach the counterparty until delivery is confirmed. ERC-8183 defines this as a Job moving from Open to Funded to Submitted to a terminal state, releasing to the provider on completion or refunding on expiry.
+
+## Why escrow is upstream of reputation
+Escrow and reputation are frequently described as two mechanisms that combine. They are better understood as one mechanism observed at two horizons. Escrow protects a single transaction. The record it leaves is also the only reputation input that is expensive to fake, precisely because value was at risk and the deal could have broken. Reputation is therefore not a second system bolted alongside escrow, it is escrow's output. This ordering dissolves the cold-start problem rather than solving it: an agent does not need a score to transact safely on day one, it needs escrow, and the score is what the transaction produces.
+
+## Costly-to-fake reputation
+Reputation is only useful if manufacturing a good one is expensive. Feedback, reviews and endorsements are cheap to produce at scale, so any weighting scheme applied to them changes the cost of an attack without changing whether the attack works. What makes a record honest is that value was genuinely at risk and the counterparty had something to lose. Two properties follow, and they operate at different levels: risk is what makes a history honest, stress is what makes it informative. A record of five hundred frictionless trades is honest but tells you mainly that the counterparty has never been tested. How a counterparty behaved when something went wrong carries far more information than how it behaved when nothing did.
+
+## Continuous exposure and lumpy exposure
+Escrow is not universally applicable, and knowing where it does not apply is part of using it well. Lumpy exposure describes a discrete deliverable with a completion condition: a job, a contract, a shipment. Value is committed up front and the loss on failure is the whole amount. Escrow earns its cost here. Continuous exposure describes a high-frequency stream of tiny payments, such as an agent buying data every few seconds. Escrowing each payment costs more than the payment, and the enforcement mechanism already exists and is free, since the payer simply stops. Maximum loss is one interval. At that frequency the unresolved risk is not non-delivery of a single tick, it is a counterparty whose quality degrades silently, which is a monitoring and reputation problem rather than an escrow one.
+
+## The cost floor of conditional settlement
+Conditional settlement is not a new invention. A documentary credit, the instrument that has underpinned international trade for centuries, is conditional settlement with a human evaluator: a bank holds payment until documents proving shipment are presented. The mechanism works and is well understood. What has never worked is its cost floor. A letter of credit makes economic sense on a large cargo and none at all on a small job, so everything below that threshold has run on trust or prepayment. Programmable escrow does not replace the concept, it lowers the floor far enough for two small counterparties, or two agents, to use it.
+
+## Liability and enforcement
+Two distinct questions, frequently conflated. Liability asks who is legally responsible after something goes wrong. Enforcement asks whether the situation can be made right at all. Liability is a claim, and a claim is only worth what can be recovered on it. Establishing that a party is liable achieves nothing if the funds are gone and the counterparty is an address holding no assets in any reachable jurisdiction. Conditional settlement sits upstream of the liability question: where funds never left conditional custody there is nothing to recover, so liability rarely has to be determined at all. Escrow does not solve liability, it makes most of it moot.
+
+## Spend policy and escrow
+Both are controls, and they protect against opposite parties. A spend policy bounds your own agent: caps, allowlists, velocity limits, human-in-the-loop thresholds. It answers what your agent is permitted to do. Escrow conditions the other side: it answers whether the counterparty has done what they were paid for. A perfectly configured spend policy tells you nothing about whether a supplier delivers. One protects you from your agent, the other protects you from theirs.
+
+## Identity is not trust
+Identity establishes who a counterparty is. It does not establish whether they will deliver. A fully verified, correctly authorized agent with a clean history can still accept payment and produce nothing. This is why identity-only verification, however rigorous, cannot be sufficient for commerce between parties that do not know each other, and why on-chain KYA has to extend past identity into enforceable terms.
+
+## Trust by ownership, by enrolment, and by infrastructure
+Three ways a system can answer the trust question, in increasing order of difficulty. Trust by ownership is the corporate case: an agent moving money between accounts a single company owns needs no trust infrastructure, because ownership vouches for every counterparty. This is Coase's theory of the firm applied to agents. Trust by enrolment is the closed-loop case: a merchant network, a loyalty programme, a stored-value scheme. It works because participation was negotiated in advance, and it reaches exactly as far as enrolment does. Trust by infrastructure is the open case, where two parties with no shared owner and no prior relationship transact, and the guarantees have to come from the rail rather than from the relationship. The first two are solved. The third is the open problem.
+
+## Trust without infrastructure does not scale past the circle
+A rotating savings and credit association, known as a ROSCA or tontine, is one of the oldest financial structures in existence and it operates with no enforcement technology whatsoever. It works because every member knows every other member, so someone who takes the pot and disappears faces a social consequence that costs more than the money. This is reputation enforcement in its purest form, and it demonstrates the boundary precisely: introduce strangers into the circle and the structure fails, because the enforcement was never in the mechanism, it was in the fact that everyone already knew each other.
+
+## Agent-to-agent and agent-to-merchant
+Two different commerce patterns with different unsolved problems. Agent-to-agent describes software paying software for a service, and open stablecoin rails are already close to the default there, with the large majority of x402 settlement occurring in USDC. Agent-to-merchant describes an agent buying from a human-facing business, which still terminates on a checkout surface owned by somebody, and that ownership is where platform fees sit. Cheap settlement has largely been achieved in the first pattern. The economics of the second are determined by discovery and distribution rather than by the payment rail.
+
+## Portability by construction and by negotiation
+Two ways an asset can reach a venue it was not issued for. Portability by construction is a property of the asset: a bearer instrument such as a payment stablecoin reaches any address without its issuer needing a relationship with the destination. Portability by negotiation is a property of the network: a tokenized deposit is a claim on one specific bank, so it reaches only where that bank has already connected, and each additional venue is a commercial and technical integration. Neither is superior in the abstract. They have different cost curves, since negotiated portability grows more expensive as venues multiply while constructed portability does not.
+
 ## How an AI agent pays (canonical four steps)
 1. The agent presents a verified identity (ERC-8004).
 2. A spend policy authorizes the transaction.
