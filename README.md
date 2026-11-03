@@ -177,6 +177,8 @@ Charitable giving in USDC, and the give half of the loop above. A buyer rounds u
 | CharityRegistry | `0x22f103F5267Be465F0ef7C2e513CB951CB3ad023` |
 | DonationProof, soulbound receipts | `0xF98edc92DBf64544EF79479353dF7B66500aA85B` |
 | ArcariusFactory, campaign escrows | `0x9B8BD40172e66CaEb91b2adb6945FAA13E6Eb8CA` |
+| GiveRouter, on-chain checks for agent donations | `0xe05e4D1694766217d0EA5B49a3De6345760FfD23` |
+| AgentPolicyV1, spend caps of donating agents | `0x39BF1C65a1Ca03E6d1DC026121378B792Fd93a81` |
 
 ### Cross-chain and settlement plumbing
 
